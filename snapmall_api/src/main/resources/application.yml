@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.snapmall.platform.dao.bean
+  config_location: classpath:mybatis-config.xml
+
