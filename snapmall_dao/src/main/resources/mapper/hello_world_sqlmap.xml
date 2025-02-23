@@ -3,7 +3,7 @@
 <mapper namespace="com.snapmall.platform.dao.HelloWorldDAO">
     <sql id="columns">
         name as name,
-        descriptioin as description
+        description as description
     </sql>
 
     <sql id="tableName">
@@ -12,8 +12,7 @@
 
     <select id="queryList" resultType="com.snapmall.platform.dao.bean.HelloWorldPO">
         SELECT
-            'test' as name,
-            'aaa' as description
+        <include refid="columns"/>
         FROM
         <include refid="tableName"/>
     </select>
