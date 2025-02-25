@@ -1,4 +1,4 @@
-package com.snapmall.platform.security.adapter;
+package com.snapmall.platform.security.common.adapter;
 
 import com.anji.captcha.service.CaptchaCacheService;
 
