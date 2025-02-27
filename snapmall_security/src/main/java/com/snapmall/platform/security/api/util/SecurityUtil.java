@@ -12,7 +12,7 @@ import com.snapmall.platform.security.common.util.AuthUserContext;
 public class SecurityUtil {
     private static final String USER_REQUEST = "/p";
 
-    public User getUser() {
+    public static User getUser() {
         if (!HttpContextUtil.getHttpServletRequest().getRequestURI().startsWith(USER_REQUEST)) {
             throw new RuntimeException("snapmall request error");
         }

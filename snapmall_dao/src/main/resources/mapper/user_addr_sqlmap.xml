@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snapmall.platform.dao.UserAddrDAO">
+    <sql id="columns">
+        id as id,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified,
+        user_id as userId,
+        receiver as receiver,
+        province_id as provinceId,
+        province as province,
+        city as city,
+        city_id as cityId,
+        area as area,
+        area_id as areaId,
+        post_code as postCode,
+        addr as addr,
+        mobile as mobile,
+        status as status,
+        is_default_addr as isDefaultAddr,
+        version as version
+    </sql>
+
+    <sql id="tableName">
+        tz_user_addr
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <trim prefixOverrides="and">
+                <if test="userId != null">and user_id = #{userId}</if>
+            </trim>
+        </where>
+    </sql>
+
+    <sql id="setColumns">
+        <set>
+            <trim suffixOverrides=",">
+                gmt_modified = now(),
+                <if test="receiver != null">receiver = #{receiver},</if>
+                <if test="provinceId != null">province_id = #{provinceId},</if>
+                <if test="province != null">province = #{province},</if>
+                <if test="city != null">city = #{city},</if>
+                <if test="cityId != null">city_id = #{cityId},</if>
+                <if test="area != null">area = #{area},</if>
+                <if test="areaId != null">area_id = #{areaId},</if>
+                <if test="postCode != null">post_code = #{postCode},</if>
+                <if test="addr != null">addr = #{addr},</if>
+                <if test="mobile != null">mobile = #{mobile},</if>
+                <if test="status != null">status = #{status},</if>
+                <if test="isDefaultAddr != null">is_default_addr = #{isDefaultAddr},</if>
+                <if test="version != null">version = #{version},</if>
+            </trim>
+        </set>
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.snapmall.platform.dao.bean.UserAddrPO">
+        INSERT INTO
+        <include refid="tableName"/>
+        (gmt_create, gmt_modified, order_id, amount, subject, note)
+        VALUES
+        (NOW(), NOW(), #{orderId}, #{amount}, #{subject}, #{note})
+    </insert>
+
+    <select id="queryList" resultType="com.snapmall.platform.dao.bean.HelloWorldPO">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        <include refid="tableName"/>
+    </select>
+
+</mapper>
