@@ -8,10 +8,10 @@ import com.snapmall.platform.common.response.StatusEnum;
 import com.snapmall.platform.security.common.bean.TokenInfoBO;
 import com.snapmall.platform.security.common.bean.UserInfoInTokenBO;
 import com.snapmall.platform.security.common.enums.SysTypeEnum;
-import jodd.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ public class TokenStore {
     }
 
     public UserInfoInTokenBO getUserInfoByAccessToken(String accessToken, boolean needDecrypt) {
-        if (StringUtil.isEmpty(accessToken)) {
+        if (StringUtils.hasText(accessToken)) {
             throw new ServiceException(StatusEnum.UNAUTHORIZED);
         }
 
