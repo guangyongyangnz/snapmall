@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.snapmall.platform.dao.UserAddrDAO">
     <sql id="columns">
-        id as id,
+        id
+        as id,
         gmt_create as gmtCreate,
         gmt_modified as gmtModified,
         user_id as userId,
@@ -28,6 +29,7 @@
     <sql id="whereClause">
         <where>
             <trim prefixOverrides="and">
+                <if test="id != null">and id = #{id}</if>
                 <if test="userId != null">and user_id = #{userId}</if>
             </trim>
         </where>
@@ -54,19 +56,44 @@
         </set>
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.snapmall.platform.dao.bean.UserAddrPO">
-        INSERT INTO
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.snapmall.platform.dao.bean.UserAddrPO">
+        insert into
         <include refid="tableName"/>
-        (gmt_create, gmt_modified, order_id, amount, subject, note)
-        VALUES
-        (NOW(), NOW(), #{orderId}, #{amount}, #{subject}, #{note})
+        (gmt_create, gmt_modified, user_id, receiver, province_id, province, city, city_id, area, area_id, post_code,
+        addr, mobile, `status`, is_default_addr, version)
+        values
+        (now(), now(), #{userId}, #{receiver}, #{provinceId}, #{province}, #{city}, #{cityId}, #{area}, #{areaId},
+        #{postCode}, #{addr}, #{mobile}, #{status}, #{isDefaultAddr}, #{version})
     </insert>
 
-    <select id="queryList" resultType="com.snapmall.platform.dao.bean.HelloWorldPO">
-        SELECT
+    <select id="getUserAddr" parameterType="com.snapmall.platform.dao.bean.UserAddrPO"
+            resultType="com.snapmall.platform.dao.bean.UserAddrPO">
+        select
         <include refid="columns"/>
-        FROM
+        from
         <include refid="tableName"/>
+        <include refid="whereClause"/>
+        <if test="orderType != null">
+            order by ${orderType}
+        </if>
+        <if test="offset != null and rows != null">
+            limit ${offset}, ${rows}
+        </if>
     </select>
+
+    <update id="updateUserAddr" parameterType="com.snapmall.platform.dao.bean.UserAddrPO">
+        update
+        <include refid="tableName"/>
+        <include refid="setColumns"/>
+        <include refid="whereClause"/>
+    </update>
+
+    <update id="deleteUserAddr" parameterType="java.lang.Long">
+        update
+        <include refid="tableName"/>
+        <include refid="setColumns"/>
+        <include refid="whereClause"/>
+    </update>
 
 </mapper>

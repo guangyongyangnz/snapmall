@@ -2,17 +2,19 @@ package com.snapmall.platform.dao;
 
 import com.snapmall.platform.dao.bean.UserAddrPO;
 
+import java.util.List;
+
 /**
  * @author chunming.ygy@gmail.com
  * @date 27/02/2025 23:14
  */
 public interface UserAddrDAO {
 
-    UserAddrPO getDefaultUserAddr(String userId);
+    Boolean insert(UserAddrPO userAddrPO);
 
-    Boolean removeDefaultUserAddr(String userId);
+    List<UserAddrPO> getUserAddr(UserAddrPO userAddrPO);
 
-    Integer setDefaultUserAddr(Long id, String userId);
+    Integer updateUserAddr(UserAddrPO userAddrPO);
 
-    UserAddrPO getUserAddrById(Long id);
+    Integer deleteUserAddr(Long id);
 }
