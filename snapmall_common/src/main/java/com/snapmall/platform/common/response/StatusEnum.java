@@ -9,7 +9,8 @@ public enum StatusEnum {
     UNAUTHORIZED("401", "authorized failed"),
     FORBIDDEN("403", "forbidded"),
     SERVICE_ERROR("500", "server error"),
-    INVALID_PARAM("1000", "invalid parameter")
+    INVALID_PARAM("1000", "invalid parameter"),
+    INVALID_PARAM_CONVERT("1001", "invalid parameter convert"),
 
     ;
 

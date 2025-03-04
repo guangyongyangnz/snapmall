@@ -1,12 +1,12 @@
 package com.snapmall.platform.api.bean;
 
-import com.snapmall.platform.dao.bean.UserAddrPO;
+import com.snapmall.platform.common.exception.ServiceException;
+import com.snapmall.platform.common.response.StatusEnum;
 import com.snapmall.platform.service.bean.UserAddrDO;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * @author chunming.ygy@gmail.com
@@ -46,30 +46,30 @@ public class UserAddrDto {
 
     private Integer version;
 
-    public static Optional<UserAddrDto> convertToDO(UserAddrBO userAddrBO) {
-        if (userAddrBO == null) {
-            return Optional.empty();
+    public static UserAddrDto convertToDto(UserAddrDO userAddrDO) {
+        if (userAddrDO == null) {
+            throw new ServiceException(StatusEnum.INVALID_PARAM_CONVERT);
         }
 
-        UserAddrDto userAddrDto = UserAddrDO.builder()
-                .id(userAddrBO.getId())
-                .gmtCreate(userAddrBO.getGmtCreate())
-                .gmtModified(userAddrBO.getGmtModified())
-                .userId(userAddrBO.getUserId())
-                .receiver(userAddrBO.getReceiver())
-                .province(userAddrBO.getProvince())
-                .city(userAddrBO.getCity())
-                .cityId(userAddrBO.getCityId())
-                .area(userAddrBO.getArea())
-                .areaId(userAddrBO.getAreaId())
-                .postCode(userAddrBO.getPostCode())
-                .addr(userAddrBO.getAddr())
-                .mobile(userAddrBO.getMobile())
-                .status(userAddrBO.getStatus())
-                .version(userAddrBO.getVersion())
+        UserAddrDto userAddrDto = UserAddrDto.builder()
+                .id(userAddrDO.getId())
+                .gmtCreate(userAddrDO.getGmtCreate())
+                .gmtModified(userAddrDO.getGmtModified())
+                .userId(userAddrDO.getUserId())
+                .receiver(userAddrDO.getReceiver())
+                .province(userAddrDO.getProvince())
+                .city(userAddrDO.getCity())
+                .cityId(userAddrDO.getCityId())
+                .area(userAddrDO.getArea())
+                .areaId(userAddrDO.getAreaId())
+                .postCode(userAddrDO.getPostCode())
+                .addr(userAddrDO.getAddr())
+                .mobile(userAddrDO.getMobile())
+                .status(userAddrDO.getStatus())
+                .version(userAddrDO.getVersion())
                 .build();
 
-        return Optional.of(userAddrDto);
+        return userAddrDto;
     }
 
 }

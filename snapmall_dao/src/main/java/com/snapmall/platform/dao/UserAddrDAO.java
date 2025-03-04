@@ -12,7 +12,7 @@ public interface UserAddrDAO {
 
     Boolean insert(UserAddrPO userAddrPO);
 
-    List<UserAddrPO> getUserAddr(UserAddrPO userAddrPO);
+    List<UserAddrPO> getUserAddrs(UserAddrPO userAddrPO);
 
     Integer updateUserAddr(UserAddrPO userAddrPO);
 

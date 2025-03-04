@@ -67,7 +67,7 @@
         #{postCode}, #{addr}, #{mobile}, #{status}, #{isDefaultAddr}, #{version})
     </insert>
 
-    <select id="getUserAddr" parameterType="com.snapmall.platform.dao.bean.UserAddrPO"
+    <select id="getUserAddrs" parameterType="com.snapmall.platform.dao.bean.UserAddrPO"
             resultType="com.snapmall.platform.dao.bean.UserAddrPO">
         select
         <include refid="columns"/>
